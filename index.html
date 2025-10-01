@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Simple Quiz</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 2em;
+    background-color: #f9f9f9;
+  }
+  .quiz-container {
+    max-width: 400px;
+    background: white;
+    padding: 1em;
+    border-radius: 8px;
+    box-shadow: 0 0 10px #ccc;
+  }
+  h2 {
+    color: #333;
+  }
+  .answers label {
+    display: block;
+    margin: 0.5em 0;
+  }
+  button {
+    margin-top: 1em;
+    padding: 0.5em 1em;
+    font-size: 1em;
+  }
+  .result {
+    margin-top: 1em;
+    font-weight: bold;
+  }
+</style>
+</head>
+<body>
+<div class="quiz-container">
+  <h2>Test Your Knowledge</h2>
+  <p>What is the capital of France?</p>
+  <div class="answers">
+    <label><input type="radio" name="answer" value="London" /> London</label>
+    <label><input type="radio" name="answer" value="Berlin" /> Berlin</label>
+    <label><input type="radio" name="answer" value="Paris" /> Paris</label>
+    <label><input type="radio" name="answer" value="Madrid" /> Madrid</label>
+  </div>
+  <button onclick="checkAnswer()">Submit</button>
+  <div class="result" id="result"></div>
+</div>
+
+<script>
+  function checkAnswer() {
+    const answers = document.getElementsByName('answer');
+    let selected = null;
+    for (const ans of answers) {
+      if (ans.checked) {
+        selected = ans.value;
+        break;
+      }
+    }
+    const resultDiv = document.getElementById('result');
+    if (selected === null) {
+      resultDiv.textContent = "Please select an answer.";
+      resultDiv.style.color = 'red';
+      return;
+    }
+    if (selected === "Paris") {
+      resultDiv.textContent = "Correct! The capital of France is Paris.";
+      resultDiv.style.color = 'green';
+    } else {
+      resultDiv.textContent = `Wrong! You selected ${selected}. The correct answer is Paris.`;
+      resultDiv.style.color = 'red';
+    }
+  }
+</script>
+</body>
+</html>
